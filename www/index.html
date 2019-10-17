@@ -24,24 +24,25 @@
           .innerHTML = event.tabItem.getAttribute('label');
       });
 
-      //
-      let sensor = new Accelerometer();
-      sensor.start();
-
-      sensor.onreading = () => {
-        document.getElementById("range1").value = sensor.x;
-        document.getElementById("range2").value = sensor.y;
-        document.getElementById("range3").value = sensor.z;
-      }
-
-
-
-      sensor.onerror = event => console.log(event.error.name, event.error.message);
-
-
-
-
     });
+
+    let sensor = new Accelerometer();
+    sensor.start();
+
+    sensor.onreading = () => {
+      document.getElementById("range1").value = sensor.x;
+      document.getElementById("range2").value = sensor.y;
+      document.getElementById("range3").value = sensor.z;
+
+      document.getElementById("acceleration_along_X").innerHTML = sensor.x;
+      document.getElementById("acceleration_along_Y").innerHTML = sensor.y;
+      document.getElementById("acceleration_along_Z").innerHTML = sensor.z;
+
+
+    }
+
+
+    sensor.onerror = event => console.log(event.error.name, event.error.message);
 
     var showTemplateDialog = function () {
       var dialog = document.getElementById('my-dialog');
@@ -102,38 +103,41 @@
       <p style="text-align: center;">
         This is the second page.
         <ons-row>
-      <ons-col width="40px" style="text-align: center; line-height: 31px;">
-        <ons-icon icon="md-volume-down"></ons-icon>
-      </ons-col>
-      <ons-col>
-        <ons-range style="width: 100%;" value="25" id="range1"></ons-range>
-      </ons-col>
-      <ons-col width="40px" style="text-align: center; line-height: 31px;">
-        <ons-icon icon="md-volume-up"></ons-icon>
-      </ons-col>
-    </ons-row>
-    <ons-row style="margin-top: 20px;">
-      <ons-col width="40px" style="text-align: center; line-height: 31px;">
-        <ons-icon icon="md-brightness-low"></ons-icon>
-      </ons-col>
-      <ons-col>
-        <ons-range style="width: 100%;" value="50" id="range2"></ons-range>
-      </ons-col>
-      <ons-col width="40px" style="text-align: center; line-height: 31px;">
-        <ons-icon icon="md-brightness-high"></ons-icon>
-      </ons-col>
-    </ons-row>
-    <ons-row style="margin-top: 20px;">
-      <ons-col width="40px" style="text-align: center; line-height: 31px;">
-        <ons-icon icon="md-thumb-down"></ons-icon>
-      </ons-col>
-      <ons-col>
-        <ons-range disabled style="width: 100%;" value="75" id="range3"></ons-range>
-      </ons-col>
-      <ons-col width="40px" style="text-align: center; line-height: 31px;">
-        <ons-icon icon="md-thumb-up"></ons-icon>
-      </ons-col>
-    </ons-row>
+          <ons-col width="40px" style="text-align: center; line-height: 31px;">
+            <ons-icon icon="md-volume-down"></ons-icon>
+          </ons-col>
+          <ons-col>
+            <ons-range style="width: 100%;" value="25" id="range1"></ons-range>
+          </ons-col>
+          <ons-col width="40px" style="text-align: center; line-height: 31px;">
+            <ons-icon icon="md-volume-up"></ons-icon>
+          </ons-col>
+        </ons-row>
+        <ons-row style="margin-top: 20px;">
+          <ons-col width="40px" style="text-align: center; line-height: 31px;">
+            <ons-icon icon="md-brightness-low"></ons-icon>
+          </ons-col>
+          <ons-col>
+            <ons-range style="width: 100%;" value="50" id="range2"></ons-range>
+          </ons-col>
+          <ons-col width="40px" style="text-align: center; line-height: 31px;">
+            <ons-icon icon="md-brightness-high"></ons-icon>
+          </ons-col>
+        </ons-row>
+        <ons-row style="margin-top: 20px;">
+          <ons-col width="40px" style="text-align: center; line-height: 31px;">
+            <ons-icon icon="md-thumb-down"></ons-icon>
+          </ons-col>
+          <ons-col>
+            <ons-range disabled style="width: 100%;" value="75" id="range3"></ons-range>
+          </ons-col>
+          <ons-col width="40px" style="text-align: center; line-height: 31px;">
+            <ons-icon icon="md-thumb-up"></ons-icon>
+          </ons-col>
+        </ons-row>
+        <div id="acceleration_along_X">1a</div>
+        <div id="acceleration_along_Y">2a</div>
+        <div id="acceleration_along_Z">3a</div>
       </p>
     </ons-page>
   </template>
