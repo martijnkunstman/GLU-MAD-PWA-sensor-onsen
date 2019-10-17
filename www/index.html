@@ -118,13 +118,13 @@
     sensor.start();
 
     sensor.onreading = () => {
-      //document.getElementById("range1").value = sensor.x;
-      //document.getElementById("range2").value = sensor.y;
-      //document.getElementById("range3").value = sensor.z;
+      document.getElementById("range1").value = sensor.x;
+      document.getElementById("range2").value = sensor.y;
+      document.getElementById("range3").value = sensor.z;
 
-      //document.getElementById("acceleration_along_X").innerHTML = sensor.x;
-      //document.getElementById("acceleration_along_Y").innerHTML = sensor.y;
-      //document.getElementById("acceleration_along_Z").innerHTML = sensor.z;
+      document.getElementById("acceleration_along_X").innerHTML = sensor.x;
+      document.getElementById("acceleration_along_Y").innerHTML = sensor.y;
+      document.getElementById("acceleration_along_Z").innerHTML = sensor.z;
 
 
     }
