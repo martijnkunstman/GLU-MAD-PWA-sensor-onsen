@@ -112,9 +112,7 @@
       document.getElementById("acceleration_along_Y").innerHTML = "2";
       document.getElementById("acceleration_along_Z").innerHTML = "3";
 
-    });
-
-    let sensor = new Accelerometer();
+      let sensor = new Accelerometer();
     sensor.start();
 
     sensor.onreading = () => {
@@ -131,6 +129,10 @@
 
     //sensor.onerror = event => console.log(event.error.name, event.error.message);
     sensor.onerror = event => document.getElementById("acceleration_along_Z").innerHTML = event.error.name;
+
+    });
+
+    
 
 
     var showTemplateDialog = function () {
