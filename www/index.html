@@ -1,9 +1,12 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
   <script src="components/loader.js"></script>
   <script src="lib/onsenui/js/onsenui.min.js"></script>
 
@@ -13,9 +16,55 @@
   <link rel="stylesheet" href="css/style.css">
 
   <script>
-    ons.ready(function() {
+    ons.ready(function () {
       console.log("Onsen UI is ready!");
+
+      document.addEventListener('prechange', function (event) {
+        document.querySelector('ons-toolbar .center')
+          .innerHTML = event.tabItem.getAttribute('label');
+      });
+
+      //
+      let sensor = new Accelerometer();
+      sensor.start();
+
+      sensor.onreading = () => {
+        document.getElementById("range1").value = sensor.x;
+        document.getElementById("range2").value = sensor.y;
+        document.getElementById("range3").value = sensor.z;
+      }
+
+
+
+      sensor.onerror = event => console.log(event.error.name, event.error.message);
+
+
+
+
     });
+
+    var showTemplateDialog = function () {
+      var dialog = document.getElementById('my-dialog');
+
+      if (dialog) {
+        dialog.show();
+      } else {
+        ons.createElement('dialog.html', {
+            append: true
+          })
+          .then(function (dialog) {
+            dialog.show();
+          });
+      }
+    };
+
+    var hideDialog = function (id) {
+      document
+        .getElementById(id)
+        .hide();
+    };
+
+
 
     if (ons.platform.isIPhoneX()) {
       document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
@@ -23,7 +72,86 @@
     }
   </script>
 </head>
+
 <body>
-  This is a template for Onsen UI app.
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Tab 1</div>
+    </ons-toolbar>
+
+    <ons-tabbar swipeable position="auto">
+      <ons-tab page="tab1.html" label="Tab 1" icon="ion-home, material:md-home" badge="7" active>
+      </ons-tab>
+      <ons-tab page="tab2.html" label="Tab 2" icon="md-settings" active-icon="md-face">
+      </ons-tab>
+    </ons-tabbar>
+
+  </ons-page>
+
+  <template id="tab1.html">
+    <ons-page id="Tab1">
+      <p style="text-align: center;">
+        This is the first page.
+      </p>
+      <ons-button onclick="showTemplateDialog()">Show Dialog</ons-button>
+    </ons-page>
+  </template>
+
+  <template id="tab2.html">
+    <ons-page id="Tab2">
+      <p style="text-align: center;">
+        This is the second page.
+        <ons-row>
+      <ons-col width="40px" style="text-align: center; line-height: 31px;">
+        <ons-icon icon="md-volume-down"></ons-icon>
+      </ons-col>
+      <ons-col>
+        <ons-range style="width: 100%;" value="25" id="range1"></ons-range>
+      </ons-col>
+      <ons-col width="40px" style="text-align: center; line-height: 31px;">
+        <ons-icon icon="md-volume-up"></ons-icon>
+      </ons-col>
+    </ons-row>
+    <ons-row style="margin-top: 20px;">
+      <ons-col width="40px" style="text-align: center; line-height: 31px;">
+        <ons-icon icon="md-brightness-low"></ons-icon>
+      </ons-col>
+      <ons-col>
+        <ons-range style="width: 100%;" value="50" id="range2"></ons-range>
+      </ons-col>
+      <ons-col width="40px" style="text-align: center; line-height: 31px;">
+        <ons-icon icon="md-brightness-high"></ons-icon>
+      </ons-col>
+    </ons-row>
+    <ons-row style="margin-top: 20px;">
+      <ons-col width="40px" style="text-align: center; line-height: 31px;">
+        <ons-icon icon="md-thumb-down"></ons-icon>
+      </ons-col>
+      <ons-col>
+        <ons-range disabled style="width: 100%;" value="75" id="range3"></ons-range>
+      </ons-col>
+      <ons-col width="40px" style="text-align: center; line-height: 31px;">
+        <ons-icon icon="md-thumb-up"></ons-icon>
+      </ons-col>
+    </ons-row>
+      </p>
+    </ons-page>
+  </template>
+
+  <template id="dialog.html">
+    <ons-dialog id="my-dialog">
+      <div style="text-align: center; padding: 10px;">
+        <p>
+          This is a simple dialog!
+        </p>
+
+        <p>
+          <ons-button onclick="hideDialog('my-dialog')">Close</ons-button>
+        </p>
+      </div>
+    </ons-dialog>
+  </template>
+
 </body>
+
 </html>
