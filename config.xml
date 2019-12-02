@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" id="com.example.helloworld" version="1.0.0">
-  <name>tutorial</name>
-  <description/>
-  <author/>
+  <name>GLU-MAD</name>
+  <description>Progressive Web Application using the Generic Sensor API and Onsen UI Framework.</description>
+  <author>Martijn Kunstman</author>
   <content src="index.html"/>
   <access origin="*"/>
   <allow-navigation href="*"/>
